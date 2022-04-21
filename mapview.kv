@@ -1,13 +1,41 @@
 <MainLayout>
     do_default_tab: False
+    tab_width: self.width / 2
 
     TabbedPanelItem:
         text: "Signal Finder"
+        SignalFinder:
 
     TabbedPanelItem:
         text: "Localisation Visualiser"
         LocalisationVisualizer:
 
+<SignalFinder>:
+    orientation: 'vertical'
+
+    MapView:
+        id: map_view
+        zoom: 15
+        lat: app.DEFAULT_LAT
+        lon: app.DEFAULT_LON
+        MapMarker:
+            lat: app.DEFAULT_LAT + 0.001
+            lon: app.DEFAULT_LON + 0.001
+            source: "alien100.png"
+
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: 0.1
+        Slider:
+            id: slider
+            min: 0
+            max: 100
+            step: 1
+        Button:
+            size_hint_x: 0.2
+            text: 'Add coordinates'
+            on_release: root.add_coordinates()
 
 
 <LocalisationVisualizer>:
