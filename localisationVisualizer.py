@@ -1,7 +1,10 @@
 from kivy.garden.mapview import MapView, MapMarkerPopup, MapMarker
+from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 
 from saveDialog import SaveDialog
+
+Builder.load_file('localisationVisualiser.kv')
 
 
 class LocalisationVisualizer(BoxLayout):
