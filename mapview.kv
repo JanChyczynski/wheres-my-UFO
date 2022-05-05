@@ -48,3 +48,51 @@
                 text: 'Cancel'
                 on_press: root.cancel()
 
+<SignalSaveDialog>:
+    size_hint_y: 0.45
+    size_hint_x: 0.35
+    BoxLayout:
+        orientation: "vertical"
+
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    size_hint_x: 0.3
+                    text: "Signal:"
+                TextInput:
+                    id: signal_txt_in
+                    text: "21.37"
+                    font_size: 30
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    size_hint_x: 0.3
+                    text: "Lat:"
+                TextInput:
+                    id: lat_txt_in
+                    text: str(app.DEFAULT_LAT)
+                    font_size: 30
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    size_hint_x: 0.3
+                    text: "Lon:"
+                TextInput:
+                    id: lon_txt_in
+                    text: str(app.DEFAULT_LON)
+                    font_size: 30
+
+        BoxLayout:
+            size_hint_y: 0.2
+            orientation: "horizontal"
+
+            Button:
+                text: 'Save'
+                on_press: root.save()
+
+            Button:
+                text: 'Cancel'
+                on_press: root.cancel()
+

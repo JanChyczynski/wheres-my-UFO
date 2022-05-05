@@ -24,6 +24,8 @@ class MainLayout(TabbedPanel):
 class MapViewApp(App):
     DEFAULT_LAT = 50.049683
     DEFAULT_LON = 19.944544
+    CENTER_MARKER_SRC = 'alien100.png'
+    SIGNAL_MARKER_SRC = 'signal.png'
 
     def build(self):
         return MainLayout()

@@ -15,8 +15,10 @@ class LocalisationVisualizer(BoxLayout):
     def add_coordinates(self):
         self.save_popup.open()
 
-    def add_marker(self, lat, lon):
+    def add_marker(self, lat, lon, size=1):
         print("asd", lat, lon)
-        marker = MapMarker(lat=lat, lon=lon, source='alien100.png', size=(1, 0.1), size_hint=(None, None),
+        marker = MapMarkerPopup(lat=lat, lon=lon, source='alien100.png', popup_size=(100*size, 100*size), size_hint=(None, None),
                            allow_stretch=True)
+        self.ids.map_view.center_on(lat, lon)
         self.ids.map_view.add_marker(marker)
+
