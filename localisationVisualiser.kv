@@ -11,13 +11,19 @@
             lon: app.DEFAULT_LON + 0.001
             source: "alien100.png"
 
-
     BoxLayout:
-        orientation: 'horizontal'
-        size_hint_y: 0.1
-        Button:
-            text: 'Add UFO coordinates'
-            on_release: root.enter_UFO_coordinates()
-        Button:
-            text: 'Add your coordinates'
-            on_release: root.enter_user_coordinates()
+        orientation: 'vertical'
+        size_hint_y: 0.15
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: 0.1
+            Button:
+                text: 'Add UFO coordinates'
+                on_release: root.enter_UFO_coordinates()
+            Button:
+                text: 'Add your coordinates'
+                on_release: root.enter_user_coordinates()
+        Label:
+            id: azimuth_label
+            text: 'Azimuth: '
+            size_hint_y: 0.05
