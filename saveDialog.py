@@ -24,8 +24,10 @@ class SaveSignalDialog(SaveDialog):
         super(SaveSignalDialog, self).__init__(parent_widget, title='Insert signal coordinates', **kwargs)
 
     def save(self, *args):
+        # TODO check for conversion errors
         self.parent_widget.add_coordinates(lat=float(self.ids.lat_txt_in.text),
-                                           lon=float(self.ids.lon_txt_in.text))
+                                           lon=float(self.ids.lon_txt_in.text),
+                                           strenght=float(self.ids.signal_txt_in.text))
         self.dismiss()
 
 

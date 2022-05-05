@@ -3,6 +3,7 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 
 from saveDialog import SaveSignalDialog
+from probabilityCalculator import ProbabiltyCalculator
 
 Builder.load_file('signalFinder.kv')
 
@@ -11,13 +12,14 @@ class SignalFinder(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.save_popup = SaveSignalDialog(self)
+        self.probability_calculator = ProbabiltyCalculator()
 
     def enter_coordinates(self):
         self.save_popup.open()
 
-    def add_coordinates(self, lat, lon):
+    def add_coordinates(self, lat, lon, strength):
         self.add_marker(lat, lon)
-        # TODO add to container
+        self.probability_calculator.add_signal(lat, lon, strength)
 
     def add_marker(self, lat, lon):
         print("asd", lat, lon)
