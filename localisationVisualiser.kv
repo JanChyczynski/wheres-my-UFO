@@ -18,6 +18,9 @@
             orientation: 'horizontal'
             size_hint_y: 0.1
             Button:
+                text: 'Set source'
+                on_release: root.set_UFO_coordinates_source()
+            Button:
                 text: 'Add UFO coordinates'
                 on_release: root.enter_UFO_coordinates()
             Button:

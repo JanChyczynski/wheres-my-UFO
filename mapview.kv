@@ -100,3 +100,44 @@
             Button:
                 text: 'Cancel'
                 on_press: root.cancel()
+
+<SaveUFOCoordinatesSourceDialog>:
+    size_hint_y: 0.45
+    size_hint_x: 0.35
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    size_hint_x: 0.3
+                    text: "IP:"
+                TextInput:
+                    id: ip_txt_in
+                    text: "127.0.0.1"
+                    font_size: 30
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    size_hint_x: 0.3
+                    text: "Port:"
+
+                TextInput:
+                    id: port_txt_in
+                    font_size: 30
+                    text: "55672"
+
+
+
+        BoxLayout:
+            size_hint_y: 0.2
+            orientation: "horizontal"
+
+            Button:
+                text: 'Save'
+                on_press: root.save()
+
+            Button:
+                text: 'Cancel'
+                on_press: root.cancel()

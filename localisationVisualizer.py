@@ -5,7 +5,7 @@ from kivy.uix.boxlayout import BoxLayout
 from azimuthVisualizer import AzimuthVisualizer
 from lineLayer import LineLayer
 from pathTracker import PathTracker
-from saveDialog import SaveUFODialog, SaveUserDialog
+from saveDialog import SaveUFODialog, SaveUserDialog, SaveUFOCoordinatesSourceDialog
 
 Builder.load_file('localisationVisualiser.kv')
 
@@ -15,6 +15,7 @@ class LocalisationVisualizer(BoxLayout):
         super().__init__(**kwargs)
         self.save_UFO_popup = SaveUFODialog(self)
         self.save_user_popup = SaveUserDialog(self)
+        self.save_source_popup = SaveUFOCoordinatesSourceDialog(self)
         self._lineLayer = LineLayer(coordinates=[[0, 0], [0, 0]])
         self._layer_added = False
         self.pathTracker = PathTracker(self._lineLayer)
@@ -25,6 +26,9 @@ class LocalisationVisualizer(BoxLayout):
 
     def enter_UFO_coordinates(self):
         self.save_UFO_popup.open()
+
+    def set_UFO_coordinates_source(self):
+        self.save_source_popup.open()
 
     def add_user_coordinates(self, lat, lon):
         self.add_user_marker(lat, lon)

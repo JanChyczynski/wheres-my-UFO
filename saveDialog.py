@@ -51,3 +51,14 @@ class SaveUFODialog(SaveDialog):
         self.parent_widget.add_UFO_coordinates(lat=float(self.ids.lat_txt_in.text),
                                                lon=float(self.ids.lon_txt_in.text))
         self.dismiss()
+
+
+class SaveUFOCoordinatesSourceDialog(SaveDialog):
+
+    def __init__(self, parent_widget, **kwargs):
+        super(SaveUFOCoordinatesSourceDialog, self).__init__(parent_widget, title='Set UFO coordinates source', **kwargs)
+
+    def save(self, *args):
+        self.parent_widget.add_UFO_coordinates(lat=float(self.ids.lat_txt_in.text),
+                                               lon=float(self.ids.lon_txt_in.text))
+        self.dismiss()
