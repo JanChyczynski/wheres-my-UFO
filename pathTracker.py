@@ -4,11 +4,11 @@ from kivy.uix.boxlayout import BoxLayout
 
 
 class PathTracker:
-    def __init__(self, lineLayer, **kwargs):
+    def __init__(self, line_layer, **kwargs):
         self.points = []
-        self.lineLayer = lineLayer
+        self.line_layer = line_layer
 
     def add_point(self, point):
         self.points.append(point)
-        self.lineLayer.coordinates = [self.points[0], self.points[-1]]
+        self.line_layer.coordinates = [self.points[0], self.points[-1]]
 

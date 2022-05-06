@@ -131,8 +131,9 @@ class LineLayer(MapLayer):
             Translate(*self.line_points_offset)
 
             Color(*self.color)
-            print(self.line_points, self.line_points[0])
+
             self.add_shape()
+
 
             # Retrieve the last saved coordinate space context
             PopMatrix()

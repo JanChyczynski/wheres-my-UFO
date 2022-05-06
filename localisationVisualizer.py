@@ -2,6 +2,7 @@ from kivy.garden.mapview import MapView, MapMarkerPopup, MapMarker
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 
+from azimuthVisualizer import AzimuthVisualizer
 from lineLayer import LineLayer
 from pathTracker import PathTracker
 from saveDialog import SaveUFODialog, SaveUserDialog
@@ -17,6 +18,7 @@ class LocalisationVisualizer(BoxLayout):
         self._lineLayer = LineLayer(coordinates=[[0, 0], [0, 0]])
         self._layer_added = False
         self.pathTracker = PathTracker(self._lineLayer)
+        self.azimuthVisualizer = AzimuthVisualizer()
 
     def enter_user_coordinates(self):
         self.save_user_popup.open()
@@ -26,21 +28,25 @@ class LocalisationVisualizer(BoxLayout):
 
     def add_user_coordinates(self, lat, lon):
         self.add_user_marker(lat, lon)
-        self.pathTracker.add_point((lat, lon))
 
     def add_UFO_coordinates(self, lat, lon):
         self.add_UFO_marker(lat, lon)
         self.pathTracker.add_point((lat, lon))
 
     def add_UFO_marker(self, lat, lon):
+        self.azimuthVisualizer.mapview = self.ids.map_view
+        self.azimuthVisualizer.text_label = self.ids.azimuth_label
         if not self._layer_added:
             self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
             self._layer_added = True
+        self.azimuthVisualizer.set_UFO_pos((lat, lon))
         marker = MapMarker(lat=lat, lon=lon, source='alien100.png', size=(1, 0.1), size_hint=(None, None),
                            allow_stretch=True)
         self.ids.map_view.add_marker(marker)
 
     def add_user_marker(self, lat, lon):
-        marker = MapMarker(lat=lat, lon=lon, source='user_location.png', size=(1, 0.1), size_hint=(None, None),
+        self.azimuthVisualizer.mapview = self.ids.map_view
+        self.azimuthVisualizer.text_label = self.ids.azimuth_label
+        marker = MapMarker(lat=lat, lon=lon, source='user_location.png', size=(1, 0.1), size_hint=(0.0001, 0.0001),
                            allow_stretch=True)
-        self.ids.map_view.add_marker(marker)
+        self.azimuthVisualizer.set_user_marker(marker, [lat, lon])
