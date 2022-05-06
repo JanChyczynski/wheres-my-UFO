@@ -132,7 +132,10 @@ class LineLayer(MapLayer):
 
             Color(*self.color)
             print(self.line_points, self.line_points[0])
-            Line(points=self.line_points, width=2)
+            self.add_shape()
 
             # Retrieve the last saved coordinate space context
             PopMatrix()
+
+    def add_shape(self):
+        Line(points=self.line_points, width=2)

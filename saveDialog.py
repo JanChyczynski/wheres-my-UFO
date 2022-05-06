@@ -27,7 +27,7 @@ class SaveSignalDialog(SaveDialog):
         # TODO check for conversion errors
         self.parent_widget.add_coordinates(lat=float(self.ids.lat_txt_in.text),
                                            lon=float(self.ids.lon_txt_in.text),
-                                           strenght=float(self.ids.signal_txt_in.text))
+                                           strength=float(self.ids.signal_txt_in.text))
         self.dismiss()
 
 
