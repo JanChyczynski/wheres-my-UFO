@@ -22,7 +22,7 @@ class HeatmapLayer(MapLayer):
     try_reposition_interval = 0.05
     move_cooldown = 0.05
 
-    def __init__(self, probab_claculator: ProbabiltyCalculator, color=[0, 0, 1, 0.5], resolution: int = 60, **kwargs):
+    def __init__(self, probab_claculator: ProbabiltyCalculator, color=[0, 0, 1, 0.5], resolution: int = 45, **kwargs):
         super().__init__(**kwargs)
         # self.calc_coordinates()
         self.probab_calculator = probab_claculator
@@ -118,7 +118,7 @@ class HeatmapLayer(MapLayer):
 
     # Function called when the MapView is moved
     def timed_reposition(self, ignored):
-        print("try reposition")
+        # print("try reposition")
         map_view = self.parent
         time_diff = (datetime.now() - self.moved_time).total_seconds()
         if map_view is None or self.moved is False or \
