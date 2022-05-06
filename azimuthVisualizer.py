@@ -25,7 +25,8 @@ class AzimuthVisualizer:
     def set_UFO_pos(self, UFO_pos):
         self._set_line_layer()
         self.UFO_pos = UFO_pos
-        if self.user_pos is not None:
+        if self.user_pos is not None and self.line_layer is not None:
+            print(self.UFO_pos, self.user_pos)
             self.line_layer.coordinates = [self.UFO_pos, self.user_pos]
             self.calc_azimuth()
 
