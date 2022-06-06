@@ -1,5 +1,6 @@
 from kivy.garden.mapview import MapView, MapMarkerPopup, MapMarker
 from kivy.lang import Builder
+from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 
 from azimuthVisualizer import AzimuthVisualizer
@@ -19,6 +20,11 @@ class LocalisationVisualizer(BoxLayout):
         self._layer_added = False
         self.pathTracker = PathTracker(self._lineLayer)
         self.azimuthVisualizer = AzimuthVisualizer()
+        Clock.schedule_once(self.pass_kivy_values,0.05)
+
+    def pass_kivy_values(self, *args):
+        self.azimuthVisualizer.mapview = self.ids.map_view
+        self.azimuthVisualizer.text_label = self.ids.azimuth_label
 
     def enter_user_coordinates(self):
         self.save_user_popup.open()
@@ -34,8 +40,6 @@ class LocalisationVisualizer(BoxLayout):
         self.pathTracker.add_point((lat, lon))
 
     def add_UFO_marker(self, lat, lon):
-        self.azimuthVisualizer.mapview = self.ids.map_view
-        self.azimuthVisualizer.text_label = self.ids.azimuth_label
         if not self._layer_added:
             self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
             self._layer_added = True
@@ -45,8 +49,9 @@ class LocalisationVisualizer(BoxLayout):
         self.ids.map_view.add_marker(marker)
 
     def add_user_marker(self, lat, lon):
-        self.azimuthVisualizer.mapview = self.ids.map_view
-        self.azimuthVisualizer.text_label = self.ids.azimuth_label
-        marker = MapMarker(lat=lat, lon=lon, source='user_location.png', size=(1, 0.1), size_hint=(0.0001, 0.0001),
-                           allow_stretch=True)
-        self.azimuthVisualizer.set_user_marker(marker, [lat, lon])
+        if not self._layer_added:
+            self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
+            self._layer_added = True
+        self.azimuthVisualizer.set_user_marker(MapMarker(lat=lat, lon=lon, source='user_location.png',
+                                                       size=(1, 0.1), size_hint=(0.0001, 0.0001), allow_stretch=True))
+        self.azimuthVisualizer.update_user_marker([lat, lon])
