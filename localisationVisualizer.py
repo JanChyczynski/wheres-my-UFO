@@ -17,7 +17,7 @@ class LocalisationVisualizer(BoxLayout):
         super().__init__(**kwargs)
         self.save_UFO_popup = SaveUFODialog(self)
         self.save_user_popup = SaveUserDialog(self)
-        self._lineLayer = LineLayer(coordinates=[[0, 0], [0, 0]])
+        self._lineLayer = LineLayer(coordinates=[])
         self._layer_added = False
         self.pathTracker = PathTracker(self._lineLayer)
         self.azimuthVisualizer = AzimuthVisualizer()
@@ -26,7 +26,8 @@ class LocalisationVisualizer(BoxLayout):
 
     def pass_kivy_values(self, *args):
         self.azimuthVisualizer.mapview = self.ids.map_view
-        self.azimuthVisualizer.text_label = self.ids.azimuth_label
+        self.azimuthVisualizer.azimuth_label = self.ids.azimuth_label
+        self.pathTracker.height_label = self.ids.height_label
 
     def enter_user_coordinates(self):
         self.save_user_popup.open()
@@ -37,9 +38,9 @@ class LocalisationVisualizer(BoxLayout):
     def add_user_coordinates(self, lat, lon):
         self.add_user_marker(lat, lon)
 
-    def add_UFO_coordinates(self, lat, lon):
+    def add_UFO_coordinates(self, lat, lon, alt=None):
         self.add_UFO_marker(lat, lon)
-        self.pathTracker.add_point((lat, lon))
+        self.pathTracker.add_point((lat, lon), alt)
 
     def start_receiving(self, ip, port):
         if self.receiver is not None:
@@ -51,7 +52,7 @@ class LocalisationVisualizer(BoxLayout):
     def handle_receive(self, *args):
         coords = self.receiver.receive()
         if coords is not None:
-            self.add_UFO_marker(coords.latitude, coords.longitude)
+            self.add_UFO_coordinates(coords.latitude, coords.longitude, coords.altitude)
 
     def add_UFO_marker(self, lat, lon):
         if not self._layer_added:

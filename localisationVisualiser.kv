@@ -23,7 +23,12 @@
             Button:
                 text: 'Add your coordinates'
                 on_release: root.enter_user_coordinates()
-        Label:
-            id: azimuth_label
-            text: 'Azimuth: '
+        BoxLayout:
+            orientation: 'horizontal'
             size_hint_y: 0.05
+            Label:
+                id: azimuth_label
+                text: 'Azimuth: '
+            Label:
+                id: height_label
+                text: 'UFO Height: '
