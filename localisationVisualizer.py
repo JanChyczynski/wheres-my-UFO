@@ -4,6 +4,7 @@ from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 
 from azimuthVisualizer import AzimuthVisualizer
+from coords_receiver import Appl
 from lineLayer import LineLayer
 from pathTracker import PathTracker
 from saveDialog import SaveUFODialog, SaveUserDialog
@@ -20,7 +21,8 @@ class LocalisationVisualizer(BoxLayout):
         self._layer_added = False
         self.pathTracker = PathTracker(self._lineLayer)
         self.azimuthVisualizer = AzimuthVisualizer()
-        Clock.schedule_once(self.pass_kivy_values,0.05)
+        self.receiver = None
+        Clock.schedule_once(self.pass_kivy_values, 0.05)
 
     def pass_kivy_values(self, *args):
         self.azimuthVisualizer.mapview = self.ids.map_view
@@ -39,6 +41,18 @@ class LocalisationVisualizer(BoxLayout):
         self.add_UFO_marker(lat, lon)
         self.pathTracker.add_point((lat, lon))
 
+    def start_receiving(self, ip, port):
+        if self.receiver is not None:
+            self.receiver.close()
+            del self.receiver
+        self.receiver = Appl(ip, port)
+        Clock.schedule_interval(self.handle_receive, 1)
+
+    def handle_receive(self, *args):
+        coords = self.receiver.receive()
+        if coords is not None:
+            self.add_UFO_marker(coords.latitude, coords.longitude)
+
     def add_UFO_marker(self, lat, lon):
         if not self._layer_added:
             self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
@@ -53,5 +67,5 @@ class LocalisationVisualizer(BoxLayout):
             self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
             self._layer_added = True
         self.azimuthVisualizer.set_user_marker(MapMarker(lat=lat, lon=lon, source='user_location.png',
-                                                       size=(1, 0.1), size_hint=(0.0001, 0.0001), allow_stretch=True))
+                                                         size=(1, 0.1), size_hint=(0.0001, 0.0001), allow_stretch=True))
         self.azimuthVisualizer.update_user_marker([lat, lon])

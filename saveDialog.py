@@ -4,6 +4,8 @@ import geocoder
 from kivy.clock import Clock
 from kivy.uix.popup import Popup
 
+from coords_receiver import Appl
+
 
 class SaveDialog(Popup):
 
@@ -43,6 +45,7 @@ class SaveUserDialog(SaveDialog):
 
     def auto_loc(self, *args):
         Clock.schedule_interval(self.send_loc, 2)
+        self.dismiss()
 
     def send_loc(self, *args):
         g = geocoder.ip('me')
@@ -57,4 +60,8 @@ class SaveUFODialog(SaveDialog):
     def save(self, *args):
         self.parent_widget.add_UFO_coordinates(lat=float(self.ids.lat_txt_in.text),
                                                lon=float(self.ids.lon_txt_in.text))
+        self.dismiss()
+
+    def socket_receive(self, *args):
+        self.parent_widget.start_receiving(self.ids.ip_txt_in.text, int(self.ids.port_txt_in.text))
         self.dismiss()

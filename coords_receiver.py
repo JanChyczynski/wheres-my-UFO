@@ -27,35 +27,45 @@ def get_address():
 class Appl:
     MAX_FRAME_SIZE = 2048
 
-    def __init__(self):
+    def __init__(self, ip, port):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # self.s.settimeout(1)
         # self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-        ip, port = get_address()
+        # ip, port = get_address()
 
         self.s.bind((ip, port))
 
         self.coords_que = queue.Queue()
         self.data_receiver_th = threading.Thread(target=self.data_receiver)
         self.data_receiver_th.start()
-        self.loop()
+        # self.loop()
+
+    def receive(self, *args):
+        coords = None
+        print("attempting to receive")
+
+        try:
+            coords = self.coords_que.get_nowait()
+        except queue.Empty:
+            pass
+        except KeyboardInterrupt as ke:
+            print("Keyboard int", ke)
+            self.exit = True
+            # sys.exit(0)
+            os._exit(0)
+
+        if coords is not None:
+            print("Received", coords)
+        return coords
+
+    def close(self):
+        self.s.close()
 
     def loop(self):
+        print("loop called")
         while True:
-            coords = None
-            try:
-                coords = self.coords_que.get_nowait()
-            except queue.Empty:
-                pass
-            except KeyboardInterrupt as ke:
-                print("Keyboard int", ke)
-                self.exit = True
-                # sys.exit(0)
-                os._exit(0)
-
-            if coords is not None:
-                print("Received", coords)
+            self.receive()
 
     def data_receiver(self):
         while True:
