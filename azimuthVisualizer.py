@@ -35,16 +35,17 @@ class AzimuthVisualizer:
             arctan2((-self.user_pos[1] + self.UFO_pos[1]), (-self.user_pos[0] + self.UFO_pos[0])) + pi) + 180) % 360
         self.azimuth_label.text = "Azimuth: " + str(azimuth)
 
+    def remove_user_marker(self):
+        if self.user_marker is not None:
+            self.mapview.remove_marker(self.user_marker)
+
     def update_user_marker(self, user_pos):
         self.user_pos = user_pos
         self._set_line_layer()
-
-        if self.user_marker is not None:
-            self.mapview.remove_marker(self.user_marker)
         if self.UFO_pos is not None:
             self.line_layer.coordinates = [self.UFO_pos, self.user_pos]
             self.calc_azimuth()
         self.mapview.add_marker(self.user_marker)
+        if self.line_layer is not None:
+            self.line_layer.reposition()
 
-    def set_user_marker(self, user_marker):
-        self.user_marker = user_marker

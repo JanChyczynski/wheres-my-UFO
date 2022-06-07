@@ -22,6 +22,7 @@ class LocalisationVisualizer(BoxLayout):
         self.pathTracker = PathTracker(self._lineLayer)
         self.azimuthVisualizer = AzimuthVisualizer()
         self.receiver = None
+        self.prev_marker = None
         Clock.schedule_once(self.pass_kivy_values, 0.05)
 
     def pass_kivy_values(self, *args):
@@ -59,14 +60,19 @@ class LocalisationVisualizer(BoxLayout):
             self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
             self._layer_added = True
         self.azimuthVisualizer.set_UFO_pos((lat, lon))
+        if self.prev_marker is not None:
+            self.ids.map_view.remove_marker(self.prev_marker)
         marker = MapMarker(lat=lat, lon=lon, source='alien100.png', size=(1, 0.1), size_hint=(None, None),
                            allow_stretch=True)
         self.ids.map_view.add_marker(marker)
+        self.prev_marker = marker
 
     def add_user_marker(self, lat, lon):
         if not self._layer_added:
             self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
             self._layer_added = True
-        self.azimuthVisualizer.set_user_marker(MapMarker(lat=lat, lon=lon, source='user_location.png',
-                                                         size=(1, 0.1), size_hint=(0.0001, 0.0001), allow_stretch=True))
+        self.azimuthVisualizer.remove_user_marker()
+        self.azimuthVisualizer.user_marker = MapMarker(lat=lat, lon=lon, source='user_location.png',
+                                                       size=(1, 0.1), size_hint=(0.0001, 0.0001),
+                                                       allow_stretch=True)
         self.azimuthVisualizer.update_user_marker([lat, lon])
