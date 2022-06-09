@@ -6,11 +6,6 @@
         zoom: 15
         lat: app.DEFAULT_LAT
         lon: app.DEFAULT_LON
-        MapMarker:
-            lat: app.DEFAULT_LAT + 0.001
-            lon: app.DEFAULT_LON + 0.001
-            source: "alien100.png"
-
 
     BoxLayout:
         orientation: 'horizontal'
@@ -34,7 +29,7 @@
         Button:
             size_hint_x: 0.18
             text: 'Calculate\nratio'
-            on_release: root.calculate_ratio()
+            on_release: root.threaded_calculate_ratio()
         Button:
             size_hint_x: 0.2
             text: 'Add \ncoordinates'
