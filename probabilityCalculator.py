@@ -44,12 +44,14 @@ class ProbabiltyCalculator:
 
         # return min([ProbabiltyCalculator.rng.random() * ratio, 1])
 
-    def get_best_ratio(self):
+    def calculate_ratio(self, start=0, end=200, step=1):
+        org_step = step
         accuracy = 20
         max_prob = 0
         max_ratio = 0
 
-        for ratio in range(0, 200):
+        ratio = start
+        while ratio < end:
             current_max_prob = 0
             for signal_entry in self.signals:
                 most_probable_dist = (ratio / signal_entry.strength)
@@ -69,5 +71,15 @@ class ProbabiltyCalculator:
             if (len(self.signals) > 2 and current_max_prob > max_prob) or current_max_prob > max_prob + 0.005:
                 max_ratio = ratio
                 max_prob = current_max_prob
+            if current_max_prob > max(0.6, 1-(len(self.signals))*0.8):
+                step = max(1, org_step//3)
+            else:
+                step = org_step
+
+            ratio += step
 
         return max_ratio
+
+    def get_best_ratio(self):
+        max_ratio = self.calculate_ratio(0, 200, 10)
+        return self.calculate_ratio(max(0, max_ratio - 10), min(200, max_ratio+10), 1)
