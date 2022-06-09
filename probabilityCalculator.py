@@ -1,5 +1,4 @@
 import random
-from math import sqrt
 
 import numpy as np
 from geopy import distance
@@ -25,8 +24,6 @@ class ProbabiltyCalculator:
         most_probable_dist = (ratio / signal_entry.strength)
 
         ret = max((1. - abs(dist - most_probable_dist) / 4000, 0.))
-        # if True or ret != 0:
-        #     print('porbab:', ret, dist, most_probable_dist)
 
         return ret
 
@@ -34,15 +31,11 @@ class ProbabiltyCalculator:
         self.signals.append(SignalEntry(lat, lon, strength * ProbabiltyCalculator.signal_multiplier))
 
     def get_probab_manual(self, lat: float, lon: float, ratio: float):
-        # return 0.5
-
         sum = 0
         for signal_entry in self.signals:
             sum += ProbabiltyCalculator.manual_entry_to_probability(signal_entry, lat, lon, ratio)
 
         return 0 if len(self.signals) == 0 else sum / len(self.signals)
-
-        # return min([ProbabiltyCalculator.rng.random() * ratio, 1])
 
     def calculate_ratio(self, start=0, end=200, step=1):
         org_step = step
@@ -66,8 +59,8 @@ class ProbabiltyCalculator:
                         signal_entry.lat * np.pi / 180)
 
                     current_max_prob = max(current_max_prob, self.get_probab_manual(new_latitude, new_longitude, ratio))
-            print(f"current ratio: {ratio}, max ratio {max_ratio}")
-            print(f"current prob: {current_max_prob}, max prob {max_prob}")
+            # print(f"current ratio: {ratio}, max ratio {max_ratio}")
+            # print(f"current prob: {current_max_prob}, max prob {max_prob}")
             if (len(self.signals) > 2 and current_max_prob > max_prob) or current_max_prob > max_prob + 0.005:
                 max_ratio = ratio
                 max_prob = current_max_prob

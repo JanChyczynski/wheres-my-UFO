@@ -13,7 +13,7 @@ from math import radians, log, tan, cos, pi
 
 from probabilityCalculator import ProbabiltyCalculator
 
-"""whole class taken from:
+"""class based on:
 https://github.com/kivy-garden/mapview/issues/4"""
 
 

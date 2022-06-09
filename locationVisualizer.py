@@ -9,10 +9,10 @@ from lineLayer import LineLayer
 from pathTracker import PathTracker
 from saveDialog import SaveUFODialog, SaveUserDialog
 
-Builder.load_file('localisationVisualiser.kv')
+Builder.load_file('locationVisualiser.kv')
 
 
-class LocalisationVisualizer(BoxLayout):
+class LocationVisualizer(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.save_UFO_popup = SaveUFODialog(self)

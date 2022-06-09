@@ -8,7 +8,7 @@ from math import radians, log, tan, cos, pi
 
 
 
-"""whole class taken from:
+"""class based on:
 https://github.com/kivy-garden/mapview/issues/4"""
 
 class LineLayer(MapLayer):

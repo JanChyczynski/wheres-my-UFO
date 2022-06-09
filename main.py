@@ -1,11 +1,7 @@
-from kivy.garden.mapview import MapView, MapMarkerPopup, MapMarker
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
-from kivy.uix.popup import Popup
 from kivy.uix.tabbedpanel import TabbedPanel
 
-import localisationVisualizer
+import locationVisualizer
 import signalFinder
 
 """
