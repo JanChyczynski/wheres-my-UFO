@@ -24,7 +24,7 @@ def get_address():
     return ip, port
 
 
-class Appl:
+class CoordinatesReceiver:
     MAX_FRAME_SIZE = 2048
 
     def __init__(self):
@@ -59,10 +59,10 @@ class Appl:
 
     def data_receiver(self):
         while True:
-            data, address = self.s.recvfrom(Appl.MAX_FRAME_SIZE)
+            data, address = self.s.recvfrom(CoordinatesReceiver.MAX_FRAME_SIZE)
             unjsoned = json.loads(data)
             self.coords_que.put(Coords.from_dict(unjsoned))
 
 
 if __name__ == "__main__":
-    appl = Appl()
+    appl = CoordinatesReceiver()
