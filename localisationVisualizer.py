@@ -29,6 +29,7 @@ class LocalisationVisualizer(BoxLayout):
         self.azimuthVisualizer.mapview = self.ids.map_view
         self.azimuthVisualizer.azimuth_label = self.ids.azimuth_label
         self.pathTracker.height_label = self.ids.height_label
+        self.pathTracker.mapview = self.ids.map_view
 
     def enter_user_coordinates(self):
         self.save_user_popup.open()
