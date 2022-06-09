@@ -21,6 +21,12 @@ class SignalFinder(BoxLayout):
     def init_ui(self, dt=0):
         self.ids.map_view.add_layer(self.heatmap_layer, mode='scatter')
 
+    def calculate_ratio(self):
+        prev = self.ids.slider.value
+        self.ids.slider.value = self.probability_calculator.get_best_ratio()
+        if prev != self.ids.slider.value:
+            self.heatmap_layer.reposition()
+
     def enter_coordinates(self):
         self.save_popup.open()
 

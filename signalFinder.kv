@@ -15,6 +15,11 @@
     BoxLayout:
         orientation: 'horizontal'
         size_hint_y: 0.1
+        Label:
+            size_hint_x: 0.18
+            text: "[u]signal strength[/u]\n     distance"
+            markup: True
+            center_text: 0.5
         Slider:
             size_hint_x: 0.7
             id: slider
@@ -27,6 +32,10 @@
 
             text: "{:3.2f}".format(slider.value)
         Button:
+            size_hint_x: 0.18
+            text: 'Calculate\nratio'
+            on_release: root.calculate_ratio()
+        Button:
             size_hint_x: 0.2
-            text: 'Add coordinates'
+            text: 'Add \ncoordinates'
             on_release: root.enter_coordinates()
