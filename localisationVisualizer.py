@@ -4,7 +4,7 @@ from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 
 from azimuthVisualizer import AzimuthVisualizer
-from coords_receiver import Appl
+from coords_receiver import CoordinatesReceiver
 from lineLayer import LineLayer
 from pathTracker import PathTracker
 from saveDialog import SaveUFODialog, SaveUserDialog
@@ -47,7 +47,7 @@ class LocalisationVisualizer(BoxLayout):
         if self.receiver is not None:
             self.receiver.close()
             del self.receiver
-        self.receiver = Appl(ip, port)
+        self.receiver = CoordinatesReceiver(ip, port)
         Clock.schedule_interval(self.handle_receive, 1)
 
     def handle_receive(self, *args):

@@ -4,7 +4,7 @@ import geocoder
 from kivy.clock import Clock
 from kivy.uix.popup import Popup
 
-from coords_receiver import Appl
+from coords_receiver import CoordinatesReceiver
 
 
 class SaveDialog(Popup):
