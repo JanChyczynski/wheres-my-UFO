@@ -10,7 +10,7 @@
         text: "Localisation Visualiser"
         LocalisationVisualizer:
 
-<SaveUFODialog,SaveUserDialog>:
+<SaveUserDialog>:
     size_hint_y: 0.45
     size_hint_x: 0.35
     BoxLayout:
@@ -35,18 +35,87 @@
                     id: lon_txt_in
                     text: str(app.DEFAULT_LON)
                     font_size: 30
-
         BoxLayout:
-            size_hint_y: 0.2
-            orientation: "horizontal"
+            orientation: "vertical"
+            BoxLayout:
+                size_hint_y: 0.2
+                orientation: "horizontal"
+
+                Button:
+                    text: 'Save'
+                    on_press: root.save()
+
+                Button:
+                    text: 'Cancel'
+                    on_press: root.cancel()
 
             Button:
-                text: 'Save'
-                on_press: root.save()
+                text: 'Start using auto location'
+                size_hint_y: 0.2
+                on_press: root.auto_loc()
 
+<SaveUFODialog>:
+    size_hint_y: 0.6
+    size_hint_x: 0.35
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    size_hint_x: 0.3
+                    text: "Lat:"
+                TextInput:
+                    id: lat_txt_in
+                    text: str(app.DEFAULT_LAT)
+                    font_size: 30
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    size_hint_x: 0.3
+                    text: "Lon:"
+                TextInput:
+                    id: lon_txt_in
+                    text: str(app.DEFAULT_LON)
+                    font_size: 30
+            BoxLayout:
+                orientation: "horizontal"
+
+                Button:
+                    text: 'Save'
+                    on_press: root.save()
+
+                Button:
+                    text: 'Cancel'
+                    on_press: root.cancel()
+            Label:
+                text: "Start receiving from socket"
+                size_hint_y: 0.4
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    size_hint_x: 0.3
+                    text: "IP: "
+                TextInput:
+                    id: ip_txt_in
+                    text: app.DEFAULT_IP
+                    font_size: 30
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    size_hint_x: 0.3
+                    text: "Port:"
+                TextInput:
+                    id: port_txt_in
+                    text: str(app.DEFAULT_PORT)
+                    font_size: 30
             Button:
-                text: 'Cancel'
-                on_press: root.cancel()
+                text: 'Connect'
+                on_press: root.socket_receive()
+
+
+
 
 <SaveSignalDialog>:
     size_hint_y: 0.45

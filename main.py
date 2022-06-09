@@ -24,6 +24,8 @@ class MainLayout(TabbedPanel):
 class MapViewApp(App):
     DEFAULT_LAT = 50.049683
     DEFAULT_LON = 19.944544
+    DEFAULT_IP = "127.0.0.1"
+    DEFAULT_PORT = 55672
 
     def build(self):
         return MainLayout()

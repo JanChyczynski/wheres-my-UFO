@@ -14,7 +14,7 @@ https://github.com/kivy-garden/mapview/issues/4"""
 class LineLayer(MapLayer):
     def __init__(self, coordinates, color=[0, 0, 1, 1], **kwargs):
         super().__init__(**kwargs)
-        self._coordinates = coordinates
+        self._coordinates:list = coordinates
         self.color = color
         self._line_points = None
         self._line_points_offset = (0, 0)
@@ -75,6 +75,8 @@ class LineLayer(MapLayer):
 
     # Function called when the MapView is moved
     def reposition(self):
+        if not self.coordinates:
+            return
         map_view = self.parent
 
         # Must redraw when the zoom changes
