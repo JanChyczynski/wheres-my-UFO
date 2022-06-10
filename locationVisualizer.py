@@ -63,8 +63,8 @@ class LocationVisualizer(BoxLayout):
         self.azimuthVisualizer.set_UFO_pos((lat, lon))
         if self.prev_marker is not None:
             self.ids.map_view.remove_marker(self.prev_marker)
-        marker = MapMarker(lat=lat, lon=lon, source='resources/alien100.png', size=(1, 0.1), size_hint=(None, None),
-                           allow_stretch=True)
+        marker = MapMarker(lat=lat, lon=lon, source='resources/ufo.png', size=(1, 0.1), size_hint=(None, None),
+                           allow_stretch=True, anchor_x = 0.5, anchor_y = 0.5)
         self.ids.map_view.add_marker(marker)
         self.prev_marker = marker
 
