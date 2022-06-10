@@ -107,7 +107,7 @@
 
 
 <SaveSignalDialog>:
-    size_hint_y: 0.45
+    size_hint_y: 0.7
     size_hint_x: 0.35
     BoxLayout:
         orientation: "vertical"
@@ -145,16 +145,47 @@
                 Label:
                     size_hint_x: 0.15
                     text: "[dB]"
+            BoxLayout:
+                size_hint_y: 0.5
+                orientation: "horizontal"
 
+                Button:
+                    text: 'Add strength'
+                    on_press: root.save()
+            BoxLayout:
+                Label:
+                    size_hint_x: 0.5
+                    text: "Sample rate:"
 
-        BoxLayout:
-            size_hint_y: 0.2
-            orientation: "horizontal"
+                TextInput:
+                    id: radio_sample_rate
+                    font_size: 20
+                    text: str(app.DEFAULT_SAMPLE_RATE)
+            BoxLayout:
+                Label:
+                    size_hint_x: 0.5
+                    text: "Center freq:"
 
-            Button:
-                text: 'Save'
-                on_press: root.save()
+                TextInput:
+                    id: freq_txt_in
+                    font_size: 20
+                    text: str(app.DEFAULT_CENTER_FREQ)
+            BoxLayout:
+                Label:
+                    size_hint_x: 0.5
+                    text: "Gain:"
 
-            Button:
-                text: 'Cancel'
-                on_press: root.cancel()
+                TextInput:
+                    id: gain_txt_in
+                    font_size: 30
+                    text: str(app.DEFAULT_GAIN)
+            BoxLayout:
+                size_hint_y: 0.5
+                orientation: "horizontal"
+
+                Button:
+                    text: 'Get from radio'
+                    on_press: root.save_auto_radio()
+                Button:
+                    text: 'Cancel'
+                    on_press: root.close()

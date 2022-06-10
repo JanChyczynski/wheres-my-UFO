@@ -3,6 +3,9 @@ import kivy_garden.mapview as mv
 from kivy.uix.widget import Widget
 from kivy_garden.mapview.utils import clamp
 
+"""source:
+https://github.com/kivy-garden/mapview/issues/33
+"""
 
 class MyMapView(mv.MapView):
     def on_touch_down(self, touch):
