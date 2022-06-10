@@ -48,7 +48,7 @@ class ProbabiltyCalculator:
             current_max_prob = 0
             for signal_entry in self.signals:
                 most_probable_dist = (ratio / signal_entry.strength)
-                r = most_probable_dist/1000
+                r = most_probable_dist / 1000
                 for i in range(0, accuracy):
                     angle = i * (2 * np.pi) / accuracy
                     x = r * np.cos(angle)
@@ -64,8 +64,8 @@ class ProbabiltyCalculator:
             if (len(self.signals) > 2 and current_max_prob > max_prob) or current_max_prob > max_prob + 0.005:
                 max_ratio = ratio
                 max_prob = current_max_prob
-            if current_max_prob > max(0.6, 1-(len(self.signals))*0.8):
-                step = max(1, org_step//3)
+            if current_max_prob > max(0.6, 1 - (len(self.signals)) * 0.8):
+                step = max(1, org_step // 3)
             else:
                 step = org_step
 
@@ -75,4 +75,4 @@ class ProbabiltyCalculator:
 
     def get_best_ratio(self):
         max_ratio = self.calculate_ratio(0, 200, 10)
-        return self.calculate_ratio(max(0, max_ratio - 10), min(200, max_ratio+10), 1)
+        return self.calculate_ratio(max(0, max_ratio - 10), min(200, max_ratio + 10), 1)

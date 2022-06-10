@@ -47,4 +47,3 @@ class AzimuthVisualizer:
         self.mapview.add_marker(self.user_marker)
         if self.line_layer is not None:
             self.line_layer.reposition()
-

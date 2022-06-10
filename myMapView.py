@@ -7,6 +7,7 @@ from kivy_garden.mapview.utils import clamp
 https://github.com/kivy-garden/mapview/issues/33
 """
 
+
 class MyMapView(mv.MapView):
     def on_touch_down(self, touch):
         # if not self.collide_point(*touch.pos):
@@ -84,4 +85,3 @@ class MyMapView(mv.MapView):
             self._invalid_scale = False
             self._scale = round(self._scatter.scale, 2)
         return self._scale
-

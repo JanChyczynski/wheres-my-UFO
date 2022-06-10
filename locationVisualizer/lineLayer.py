@@ -6,15 +6,14 @@ from mapview import \
     (MIN_LONGITUDE, MAX_LONGITUDE, MIN_LATITUDE, MAX_LATITUDE)
 from math import radians, log, tan, cos, pi
 
-
-
 """class based on:
 https://github.com/kivy-garden/mapview/issues/4"""
+
 
 class LineLayer(MapLayer):
     def __init__(self, coordinates, color=[0, 0, 1, 1], **kwargs):
         super().__init__(**kwargs)
-        self._coordinates:list = coordinates
+        self._coordinates: list = coordinates
         self.color = color
         self._line_points = None
         self._line_points_offset = (0, 0)
@@ -135,7 +134,6 @@ class LineLayer(MapLayer):
             Color(*self.color)
 
             self.add_shape()
-
 
             # Retrieve the last saved coordinate space context
             PopMatrix()

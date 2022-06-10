@@ -47,11 +47,11 @@ class HeatmapLayer(MapLayer):
         bottom_right = [bbox[2], bbox[3]]
         step_x = (bbox[2] - bbox[0]) / self.resolution
         step_y = (bbox[3] - bbox[1]) / self.resolution
-        self._coordinates = np.zeros((self.resolution**2, 2))
+        self._coordinates = np.zeros((self.resolution ** 2, 2))
         for i in range(self.resolution):
             for j in range(self.resolution):
-                self.coordinates[i+self.resolution*j][0] = top_left[0] + j * step_x
-                self.coordinates[i+self.resolution*j][1] = top_left[1] + i * step_y
+                self.coordinates[i + self.resolution * j][0] = top_left[0] + j * step_x
+                self.coordinates[i + self.resolution * j][1] = top_left[1] + i * step_y
 
         self.colors = [
             self.color[:-1] + [self.probab_calculator.get_probab_manual(lat, lon,
