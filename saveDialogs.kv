@@ -146,7 +146,6 @@
                     size_hint_x: 0.15
                     text: "[dB]"
             BoxLayout:
-                size_hint_y: 0.5
                 orientation: "horizontal"
 
                 Button:
@@ -180,7 +179,6 @@
                     font_size: 30
                     text: str(app.DEFAULT_GAIN)
             BoxLayout:
-                size_hint_y: 0.5
                 orientation: "horizontal"
 
                 Button:
@@ -188,4 +186,4 @@
                     on_press: root.save_auto_radio()
                 Button:
                     text: 'Cancel'
-                    on_press: root.close()
+                    on_press: root.cancel()

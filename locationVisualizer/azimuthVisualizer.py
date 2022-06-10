@@ -22,7 +22,7 @@ class AzimuthVisualizer:
             self.line_layer = LineLayer(coordinates=[self.UFO_pos, self.user_pos], color=[1, 0, 0, 1])
             self.mapview.add_layer(self.line_layer, mode='scatter')
 
-    def set_UFO_pos(self, UFO_pos):
+    def set_ufo_pos(self, UFO_pos):
         self._set_line_layer()
         self.UFO_pos = UFO_pos
         if self.user_pos is not None and self.line_layer is not None:

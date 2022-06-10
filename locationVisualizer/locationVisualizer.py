@@ -15,7 +15,7 @@ Builder.load_file('locationVisualizer/locationVisualiser.kv')
 class LocationVisualizer(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.save_UFO_popup = SaveUFODialog(self)
+        self.save_ufo_popup = SaveUFODialog(self)
         self.save_user_popup = SaveUserDialog(self)
         self._lineLayer = LineLayer(coordinates=[])
         self._layer_added = False
@@ -35,7 +35,7 @@ class LocationVisualizer(BoxLayout):
         self.save_user_popup.open()
 
     def enter_ufo_coordinates(self):
-        self.save_UFO_popup.open()
+        self.save_ufo_popup.open()
 
     def add_user_coordinates(self, lat, lon):
         self.add_user_marker(lat, lon)
@@ -60,7 +60,7 @@ class LocationVisualizer(BoxLayout):
         if not self._layer_added:
             self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
             self._layer_added = True
-        self.azimuthVisualizer.set_UFO_pos((lat, lon))
+        self.azimuthVisualizer.set_ufo_pos((lat, lon))
         if self.prev_marker is not None:
             self.ids.map_view.remove_marker(self.prev_marker)
         marker = MapMarker(lat=lat, lon=lon, source='resources/ufo.png', size=(1, 0.1), size_hint=(None, None),
