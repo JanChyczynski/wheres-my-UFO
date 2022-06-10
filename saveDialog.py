@@ -3,9 +3,13 @@ from abc import abstractmethod
 import geocoder
 from kivy.clock import Clock
 from kivy.lang import Builder
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 import pylab
 import rtlsdr
+from rtlsdr.rtlsdr import LibUSBError
 
 '''
 to use this you must put rtlsdr.dll in the same folder as python location 
@@ -45,14 +49,30 @@ class SaveSignalDialog(SaveDialog):
         self.dismiss()
 
     def save_auto_radio(self):
-        sdr = rtlsdr.RtlSdr()
-        sdr.sample_rate = 3.2e6
-        sdr.center_freq = 95e6
-        sdr.gain = 5
-        samples = sdr.read_samples(500e3)
-        self.parent_widget.add_coordinates(lat=float(self.ids.lat_txt_in.text),
-                                           lon=float(self.ids.lon_txt_in.text),
-                                           strength=float(10 * pylab.log10(pylab.var(samples))))
+        try:
+            sdr = rtlsdr.RtlSdr()
+            sdr.sample_rate = float(self.ids.sample_txt_in)
+            sdr.center_freq = float(self.ids.freq_txt_in)
+            sdr.gain = float(self.ids.gain_txt_in)
+            samples = sdr.read_samples(500e3)
+            self.parent_widget.add_coordinates(lat=float(self.ids.lat_txt_in.text),
+                                               lon=float(self.ids.lon_txt_in.text),
+                                               strength=float(10 * pylab.log10(pylab.var(samples))))
+        except LibUSBError as err:
+            self.dismiss()
+            box = BoxLayout(orientation='vertical', padding=(10))
+            box.add_widget(Label(text=str(err)))
+            btn1 = Button(text="close")
+            box.add_widget(btn1)
+
+            popup = Popup(title='rtlsdr error', title_size=(30),
+                          title_align='center', content=box,
+                          size_hint=(None, None), size=(600, 200),
+                          auto_dismiss=True)
+
+            btn1.bind(on_press=popup.dismiss)
+            popup.open()
+            print(err)
 
 
 class SaveUserDialog(SaveDialog):
