@@ -2,6 +2,7 @@ import random
 import threading
 from datetime import datetime
 
+import numpy as np
 from kivy.clock import Clock
 from kivy.garden.mapview import MapView, MapMarkerPopup, MapMarker, MapLayer
 from kivy.graphics import Color, Line, Rectangle
@@ -19,8 +20,8 @@ https://github.com/kivy-garden/mapview/issues/4"""
 
 class HeatmapLayer(MapLayer):
     max_opacity = 0.6
-    try_reposition_interval = 0.05
-    move_cooldown = 0.05
+    try_reposition_interval = 0.01
+    move_cooldown = 0.35
 
     def __init__(self, probab_claculator: ProbabiltyCalculator, color=[0, 0, 1, 0.5], resolution: int = 45, **kwargs):
         super().__init__(**kwargs)
@@ -48,10 +49,11 @@ class HeatmapLayer(MapLayer):
         bottom_right = [bbox[2], bbox[3]]
         step_x = (bbox[2] - bbox[0]) / self.resolution
         step_y = (bbox[3] - bbox[1]) / self.resolution
-        self._coordinates = []
+        self._coordinates = np.zeros((self.resolution**2, 2))
         for i in range(self.resolution):
             for j in range(self.resolution):
-                self.coordinates.append([top_left[0] + j * step_x, top_left[1] + i * step_y])
+                self.coordinates[i+self.resolution*j][0] = top_left[0] + j * step_x
+                self.coordinates[i+self.resolution*j][1] = top_left[1] + i * step_y
 
         self.colors = [
             self.color[:-1] + [self.probab_calculator.get_probab_manual(lat, lon,
