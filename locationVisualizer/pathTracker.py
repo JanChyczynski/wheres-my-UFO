@@ -29,7 +29,6 @@ class PathTracker:
                 alt - self.initial_alt) + 'm'
             self.max_alt = max(self.max_alt, alt)
             if alt < self.max_alt and self.apogee_nr is not None and len(self.points[self.apogee_nr:]) > 1:
-                print()
                 line = Line.best_fit(self.points[self.apogee_nr:])
                 line_t = (self.initial_alt - line.point[2]) / line.vector[2]
                 lat = line.point[0] + line_t * line.vector[0]
