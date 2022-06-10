@@ -4,10 +4,18 @@ import geocoder
 from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
+import pylab
+import rtlsdr
+
+'''
+to use this you must put rtlsdr.dll in the same folder as python location 
+(https://github.com/librtlsdr/librtlsdr/releases)
+'''
 
 from coords_receiver import CoordinatesReceiver
 
 Builder.load_file('saveDialogs.kv')
+
 
 class SaveDialog(Popup):
 
@@ -35,6 +43,16 @@ class SaveSignalDialog(SaveDialog):
                                            lon=float(self.ids.lon_txt_in.text),
                                            strength=float(self.ids.signal_txt_in.text))
         self.dismiss()
+
+    def save_auto_radio(self):
+        sdr = rtlsdr.RtlSdr()
+        sdr.sample_rate = 3.2e6
+        sdr.center_freq = 95e6
+        sdr.gain = 5
+        samples = sdr.read_samples(500e3)
+        self.parent_widget.add_coordinates(lat=float(self.ids.lat_txt_in.text),
+                                           lon=float(self.ids.lon_txt_in.text),
+                                           strength=float(10 * pylab.log10(pylab.var(samples))))
 
 
 class SaveUserDialog(SaveDialog):
