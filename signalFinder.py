@@ -44,7 +44,7 @@ class SignalFinder(BoxLayout):
 
     def add_marker(self, lat, lon):
         print("asd", lat, lon)
-        marker = MapMarker(lat=lat, lon=lon, source='alien100.png', size=(1, 0.1), size_hint=(None, None),
+        marker = MapMarker(lat=lat, lon=lon, source='resources/alien100.png', size=(1, 0.1), size_hint=(None, None),
                            allow_stretch=True)
         self.ids.map_view.add_marker(marker)
 

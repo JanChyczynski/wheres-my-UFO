@@ -4,7 +4,7 @@ from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 
 from azimuthVisualizer import AzimuthVisualizer
-from coords_receiver import CoordinatesReceiver
+from coordsReceiver import CoordinatesReceiver
 from lineLayer import LineLayer
 from pathTracker import PathTracker
 from saveDialog import SaveUFODialog, SaveUserDialog
@@ -63,7 +63,7 @@ class LocationVisualizer(BoxLayout):
         self.azimuthVisualizer.set_UFO_pos((lat, lon))
         if self.prev_marker is not None:
             self.ids.map_view.remove_marker(self.prev_marker)
-        marker = MapMarker(lat=lat, lon=lon, source='alien100.png', size=(1, 0.1), size_hint=(None, None),
+        marker = MapMarker(lat=lat, lon=lon, source='resources/alien100.png', size=(1, 0.1), size_hint=(None, None),
                            allow_stretch=True)
         self.ids.map_view.add_marker(marker)
         self.prev_marker = marker
@@ -73,7 +73,7 @@ class LocationVisualizer(BoxLayout):
             self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
             self._layer_added = True
         self.azimuthVisualizer.remove_user_marker()
-        self.azimuthVisualizer.user_marker = MapMarker(lat=lat, lon=lon, source='user_location.png',
+        self.azimuthVisualizer.user_marker = MapMarker(lat=lat, lon=lon, source='resources/user_location.png',
                                                        size=(1, 0.1), size_hint=(0.0001, 0.0001),
                                                        allow_stretch=True)
         self.azimuthVisualizer.update_user_marker([lat, lon])

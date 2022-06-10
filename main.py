@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.lang import Builder
 from kivy.uix.tabbedpanel import TabbedPanel
 
 import locationVisualizer
@@ -15,6 +16,9 @@ garden install mapview
 
 class MainLayout(TabbedPanel):
     pass
+
+
+Builder.load_file('mainLayout.kv')
 
 
 class MapViewApp(App):

@@ -1,7 +1,7 @@
 import random
 import socket
 from time import sleep
-from coords_receiver import get_address
+from coordsReceiver import get_address
 
 SENDING_INTERVAL = 2
 

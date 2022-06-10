@@ -39,7 +39,7 @@ class PathTracker:
                 lon = line.point[1] + line_t * line.vector[1]
                 if self.map_marker is not None:
                     self.mapview.remove_marker(self.map_marker)
-                self.map_marker = MapMarker(lat=float(lat), lon=float(lon), source='predicted_fall.png',
+                self.map_marker = MapMarker(lat=float(lat), lon=float(lon), source='resources/predicted_fall.png',
                                             size=(0.5, 0.05), size_hint=(0.00005, 0.00005),
                                             allow_stretch=True, anchor_x=0.5, anchor_y=0.5)
                 self.mapview.add_marker(self.map_marker)
