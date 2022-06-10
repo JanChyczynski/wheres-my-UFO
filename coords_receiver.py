@@ -43,7 +43,6 @@ class CoordinatesReceiver:
 
     def receive(self, *args):
         coords = None
-        print("attempting to receive")
 
         try:
             coords = self.coords_que.get_nowait()
