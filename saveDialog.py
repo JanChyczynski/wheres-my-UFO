@@ -65,7 +65,7 @@ class SaveSignalDialog(SaveDialog):
             btn1 = Button(text="close")
             box.add_widget(btn1)
 
-            popup = Popup(title='rtlsdr error', title_size=(30),
+            popup = Popup(title='signal strength reading error', title_size=(30),
                           title_align='center', content=box,
                           size_hint=(None, None), size=(600, 200),
                           auto_dismiss=True)
