@@ -31,11 +31,11 @@ class ProbabiltyCalculator:
         self.signals.append(SignalEntry(lat, lon, strength * ProbabiltyCalculator.signal_multiplier))
 
     def get_probab_manual(self, lat: float, lon: float, ratio: float):
-        sum = 0
+        probabs_sum = 0
         for signal_entry in self.signals:
-            sum += ProbabiltyCalculator.manual_entry_to_probability(signal_entry, lat, lon, ratio)
+            probabs_sum += ProbabiltyCalculator.manual_entry_to_probability(signal_entry, lat, lon, ratio)
 
-        return 0 if len(self.signals) == 0 else sum / len(self.signals)
+        return 0 if len(self.signals) == 0 else probabs_sum / len(self.signals)
 
     def calculate_ratio(self, start=0, end=200, step=1):
         org_step = step

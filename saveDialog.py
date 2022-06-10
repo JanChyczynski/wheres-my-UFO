@@ -58,12 +58,12 @@ class SaveSignalDialog(SaveDialog):
                                                strength=float(10 * pylab.log10(pylab.var(samples))))
         except LibUSBError as err:
             self.dismiss()
-            box = BoxLayout(orientation='vertical', padding=(10))
+            box = BoxLayout(orientation='vertical', padding=10)
             box.add_widget(Label(text=str(err)))
             btn1 = Button(text="close")
             box.add_widget(btn1)
 
-            popup = Popup(title='signal strength reading error', title_size=(30),
+            popup = Popup(title='signal strength reading error', title_size=30,
                           title_align='center', content=box,
                           size_hint=(None, None), size=(600, 200),
                           auto_dismiss=True)
@@ -98,7 +98,7 @@ class SaveUFODialog(SaveDialog):
         super(SaveUFODialog, self).__init__(parent_widget, title='Insert UFO coordinates', **kwargs)
 
     def save(self, *args):
-        self.parent_widget.add_UFO_coordinates(lat=float(self.ids.lat_txt_in.text),
+        self.parent_widget.add_ufo_coordinates(lat=float(self.ids.lat_txt_in.text),
                                                lon=float(self.ids.lon_txt_in.text))
         self.dismiss()
 

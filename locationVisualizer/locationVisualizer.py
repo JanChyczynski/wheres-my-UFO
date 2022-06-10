@@ -34,14 +34,14 @@ class LocationVisualizer(BoxLayout):
     def enter_user_coordinates(self):
         self.save_user_popup.open()
 
-    def enter_UFO_coordinates(self):
+    def enter_ufo_coordinates(self):
         self.save_UFO_popup.open()
 
     def add_user_coordinates(self, lat, lon):
         self.add_user_marker(lat, lon)
 
-    def add_UFO_coordinates(self, lat, lon, alt=None):
-        self.add_UFO_marker(lat, lon)
+    def add_ufo_coordinates(self, lat, lon, alt=None):
+        self.add_ufo_marker(lat, lon)
         self.pathTracker.add_point((lat, lon), alt)
 
     def start_receiving(self, ip, port):
@@ -54,9 +54,9 @@ class LocationVisualizer(BoxLayout):
     def handle_receive(self, *args):
         coords = self.receiver.receive()
         if coords is not None:
-            self.add_UFO_coordinates(coords.latitude, coords.longitude, coords.altitude)
+            self.add_ufo_coordinates(coords.latitude, coords.longitude, coords.altitude)
 
-    def add_UFO_marker(self, lat, lon):
+    def add_ufo_marker(self, lat, lon):
         if not self._layer_added:
             self.ids.map_view.add_layer(self._lineLayer, mode="scatter")
             self._layer_added = True

@@ -44,7 +44,6 @@ class HeatmapLayer(MapLayer):
     def calc_coordinates(self):
         bbox = self.parent.get_bbox()
         top_left = [bbox[0], bbox[1]]
-        bottom_right = [bbox[2], bbox[3]]
         step_x = (bbox[2] - bbox[0]) / self.resolution
         step_y = (bbox[3] - bbox[1]) / self.resolution
         self._coordinates = np.zeros((self.resolution ** 2, 2))
