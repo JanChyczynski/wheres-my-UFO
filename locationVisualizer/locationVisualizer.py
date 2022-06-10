@@ -1,15 +1,15 @@
-from kivy.garden.mapview import MapView, MapMarkerPopup, MapMarker
+from kivy.garden.mapview import MapMarker
 from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 
-from azimuthVisualizer import AzimuthVisualizer
-from coordsReceiver import CoordinatesReceiver
-from lineLayer import LineLayer
-from pathTracker import PathTracker
+from locationVisualizer.azimuthVisualizer import AzimuthVisualizer
+from locationVisualizer.coordsReceiver import CoordinatesReceiver
+from locationVisualizer.lineLayer import LineLayer
+from locationVisualizer.pathTracker import PathTracker
 from saveDialog import SaveUFODialog, SaveUserDialog
 
-Builder.load_file('locationVisualiser.kv')
+Builder.load_file('locationVisualizer/locationVisualiser.kv')
 
 
 class LocationVisualizer(BoxLayout):

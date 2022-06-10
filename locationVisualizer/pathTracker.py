@@ -1,9 +1,6 @@
-from kivy.garden.mapview import MapMarkerPopup, MapMarker
-import myMapView
-from lineLayer import LineLayer
+from kivy.garden.mapview import MapMarker
+from locationVisualizer.lineLayer import LineLayer
 from skspatial.objects import Line
-from skspatial.objects import Points
-from skspatial.plotting import plot_3d
 
 '''
 pip install scikit-spatial

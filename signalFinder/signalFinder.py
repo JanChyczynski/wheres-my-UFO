@@ -1,15 +1,15 @@
 import threading
 
 from kivy.clock import Clock
-from kivy.garden.mapview import MapView, MapMarkerPopup, MapMarker
+from kivy.garden.mapview import MapMarker
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 
 from saveDialog import SaveSignalDialog
-from probabilityCalculator import ProbabiltyCalculator
-from heatmapLayer import HeatmapLayer
+from signalFinder.probabilityCalculator import ProbabiltyCalculator
+from signalFinder.heatmapLayer import HeatmapLayer
 
-Builder.load_file('signalFinder.kv')
+Builder.load_file('signalFinder/signalFinder.kv')
 
 
 class SignalFinder(BoxLayout):

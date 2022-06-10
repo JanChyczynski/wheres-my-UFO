@@ -1,7 +1,7 @@
 import random
 import socket
 from time import sleep
-from coordsReceiver import get_address
+from locationVisualizer.coordsReceiver import get_address
 
 SENDING_INTERVAL = 2
 
@@ -15,14 +15,14 @@ def calc_h(t):
     if t <= 10.5:
         return -12 * t * (t - 21)
     else:
-        return max(0, 1323 - (t-10.5) * 20)
+        return max(0, 1323 - (t - 10.5) * 20)
 
 
 lat = 50.070594787597656
 lon = 19.90592384338379
 t = -3
 while True:
-    if calc_h(t)!=0:
+    if calc_h(t) != 0:
         lat += random.uniform(0, 2e-2)
         lon += random.uniform(4e-2, 6e-2)
 

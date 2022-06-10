@@ -16,8 +16,6 @@ to use this you must put rtlsdr.dll in the same folder as python location
 (https://github.com/librtlsdr/librtlsdr/releases)
 '''
 
-from coordsReceiver import CoordinatesReceiver
-
 Builder.load_file('saveDialogs.kv')
 
 

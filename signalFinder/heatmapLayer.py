@@ -11,7 +11,7 @@ from mapview import \
     (MIN_LONGITUDE, MAX_LONGITUDE, MIN_LATITUDE, MAX_LATITUDE)
 from math import radians, log, tan, cos, pi
 
-from probabilityCalculator import ProbabiltyCalculator
+from signalFinder.probabilityCalculator import ProbabiltyCalculator
 
 """class based on:
 https://github.com/kivy-garden/mapview/issues/4"""

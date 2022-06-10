@@ -5,7 +5,7 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from numpy import rad2deg, arctan2
 
-from lineLayer import LineLayer
+from locationVisualizer.lineLayer import LineLayer
 
 
 class AzimuthVisualizer:

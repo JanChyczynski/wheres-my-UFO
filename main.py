@@ -2,8 +2,9 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.tabbedpanel import TabbedPanel
 
-import locationVisualizer
-import signalFinder
+import locationVisualizer.locationVisualizer
+import signalFinder.signalFinder
+from myMapView import MyMapView
 
 """
 to install 

@@ -5,7 +5,7 @@ import sys
 import threading
 import socket
 
-from coordinates import Coords
+from locationVisualizer.coordinates import Coords
 
 
 def get_address():
