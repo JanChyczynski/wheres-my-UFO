@@ -2,10 +2,12 @@ from abc import abstractmethod
 
 import geocoder
 from kivy.clock import Clock
+from kivy.lang import Builder
 from kivy.uix.popup import Popup
 
 from coords_receiver import CoordinatesReceiver
 
+Builder.load_file('saveDialogs.kv')
 
 class SaveDialog(Popup):
 
