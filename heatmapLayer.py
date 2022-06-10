@@ -1,11 +1,10 @@
 import random
-import threading
 from datetime import datetime
 
 import numpy as np
 from kivy.clock import Clock
 from kivy.garden.mapview import MapView, MapMarkerPopup, MapMarker, MapLayer
-from kivy.graphics import Color, Line, Rectangle
+from kivy.graphics import Color, Rectangle
 from kivy.graphics.context_instructions import Translate, Scale, PushMatrix, PopMatrix
 from mapview.utils import clamp
 from mapview import \
@@ -25,7 +24,6 @@ class HeatmapLayer(MapLayer):
 
     def __init__(self, probab_claculator: ProbabiltyCalculator, color=[0, 0, 1, 0.5], resolution: int = 45, **kwargs):
         super().__init__(**kwargs)
-        # self.calc_coordinates()
         self.probab_calculator = probab_claculator
         self._coordinates = [[0, 0]]
         self.color = color
@@ -60,9 +58,6 @@ class HeatmapLayer(MapLayer):
                                                                         self.parent.parent.ids.slider.value) * HeatmapLayer.max_opacity]
             for
             lat, lon in self.coordinates]
-        # self.coordinates = [[bbox[0], bbox[3]], [bbox[2], bbox[1]]]
-
-        # self.coordinates = self._coordinates
 
     @property
     def coordinates(self):
@@ -126,7 +121,7 @@ class HeatmapLayer(MapLayer):
         if map_view is None or self.moved is False or \
                 time_diff < HeatmapLayer.move_cooldown:
             return
-        print("reposition", time_diff)
+        # print("reposition", time_diff)
         self.calc_coordinates()
         # Must redraw when the zoom changes
         # as the scatter transform resets for the new tiles
