@@ -1,4 +1,5 @@
-from kivy.garden.mapview import MapView, MapMarkerPopup, MapMarker
+from kivy.garden.mapview import MapMarkerPopup, MapMarker
+import myMapView
 from lineLayer import LineLayer
 from skspatial.objects import Line
 from skspatial.objects import Points
