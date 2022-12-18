@@ -1,5 +1,5 @@
 # Where's my UFO?
-Applications for tracking the position of rockets (or weather baloons, UFOs etc.) during launches. It consists of 2 main modules:
+Application for tracking the position of rockets (or weather baloons, UFOs etc.) during launches. It consists of 2 main modules:
 1. Visualising the rocket's position based on the coordinates sent by the rocket
 
 
